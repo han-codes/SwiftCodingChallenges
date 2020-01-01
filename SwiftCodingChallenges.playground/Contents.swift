@@ -76,3 +76,49 @@ count(for: "a", in: "alphabet")
 
 // Swift Solution: Using reduce()
 
+/*
+ Challenge 7: Condense whitespace
+ Write a function that returns a string with any consecutive spaces replaced with a single space
+ */
+
+func challenge7RemoveDuplicateWhitespaces(input: String) -> String {
+    
+    // Loop through input
+    // Set a boolean to true when we run into an empty space
+    // Set boolean to false when we the character is not a [space] and append the character to a string
+    
+    var seenSpace = false
+    var completedString = ""
+    
+    for character in input {
+        
+        if character == " "{
+            
+            if seenSpace { continue }
+            seenSpace = true
+        }
+        else {
+            
+            seenSpace = false
+        }
+        
+        completedString.append(character)
+    }
+    
+    return completedString
+}
+
+challenge7RemoveDuplicateWhitespaces(input: " hi  there     t e s t  ")
+
+/*
+ Challenge 7a: Condense Whitespace and Leading/Trailing spaces
+ Remove duplicate whitespace while also removing leading and trailing whitespace
+ */
+
+func challenge7a(input: String) -> String {
+    
+    let components = input.components(separatedBy: " ")
+    return components.filter { !$0.isEmpty }.joined(separator: " ")
+}
+
+challenge7a(input: " hi  there     t e s t  ")
