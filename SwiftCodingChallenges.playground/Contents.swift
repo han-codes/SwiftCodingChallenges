@@ -92,7 +92,7 @@ func challenge7RemoveDuplicateWhitespaces(input: String) -> String {
     
     for character in input {
         
-        if character == " "{
+        if character == " " {
             
             if seenSpace { continue }
             seenSpace = true
@@ -110,6 +110,16 @@ func challenge7RemoveDuplicateWhitespaces(input: String) -> String {
 
 challenge7RemoveDuplicateWhitespaces(input: " hi  there     t e s t  ")
 
+// Solution using regular expressions
+// This will be more expensieve but takes a lot to see the difference in speed
+
+func challenge7UsingRegularrExpressions(input: String) -> String {
+    
+    return input.replacingOccurrences(of: " +", with: " ", options: .regularExpression, range: nil)
+}
+
+challenge7UsingRegularrExpressions(input: " hi  there     t e s t  ")
+
 /*
  Challenge 7a: Condense Whitespace and Leading/Trailing spaces
  Remove duplicate whitespace while also removing leading and trailing whitespace
@@ -122,3 +132,49 @@ func challenge7a(input: String) -> String {
 }
 
 challenge7a(input: " hi  there     t e s t  ")
+
+/*
+ Challenge 8: String is rotated
+ Write a function that accepts 2 strings, and returns true if one string is rotation of the other, taking letter case into account.
+ Tip: String rotation is when you take a string, remove some letters from its end, then append them to the front. E.g. "swift" rotated by 2 characters would be "ftswi"
+ */
+
+// MARK: - Close but WRONG Solution
+// would incorrectly return true if string contains letters but isn't an actual rotation e.g. abc and a should be false but returns true
+func challenge8StringIsRotated(input: String, rotated: String) -> Bool {
+    
+    // If you write a string twice, it must have all possible rotations e.g. cat = catcat
+        // Then check if this appended string contains the input we're comparing with
+    
+    let firstInputRotation = input + input
+    return firstInputRotation.contains(rotated)
+}
+
+challenge8StringIsRotated(input: "abcde", rotated: "e")
+challenge8StringIsRotated(input: "abcde", rotated: "cdeab")
+
+// MARK; - Solution that takes account of length of strings so they must be rotations
+
+func challenge8Solution(input: String, rotated: String) -> Bool {
+    
+    guard input.count == rotated.count else { return false }
+    
+    let combined = input + input
+    return combined.contains(rotated)
+}
+
+challenge8Solution(input: "abcde", rotated: "e")
+challenge8Solution(input: "abcde", rotated: "cdeab")
+
+/*
+ Challenge 9: Find pangrams
+ Write a function that returns true if it is given a string that is an English pangram, ignoring letter-case
+ Tip: A pangram is a string that contains every letter of the alphabet at least once.
+ */
+
+// letters can be used multiple times
+// we could just have an array of letters and loop through input string and check that alphabetArray contains it
+
+func challenge9IsAPangram(input: String) -> Bool {
+    
+}
